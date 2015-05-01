@@ -1,3 +1,3 @@
 (function(game){
-  //setInterval(game.run(), 500);
+  setInterval(game.run(), 500);
 })(window.Game);

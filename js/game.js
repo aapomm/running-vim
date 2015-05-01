@@ -11,7 +11,7 @@
 
     return function(){
       for(var i=0; i<5; i++) {
-        $lines[i].append('a');
+        $lines[i].append('&nbsp;');
       }
     }
   }

@@ -43,3 +43,6 @@ header {
 .letter.active {
   background-color: gray;
 }
+.letter:first-child {
+  border-left: 1px solid red;
+}

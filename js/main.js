@@ -15,11 +15,13 @@ $(function(){
 
   // Game loop
   // Updates every 0.01 of a second
-
-  setInterval(function(){
+  var gameInterval = setInterval(function(){
     var timenow = $.now();
     if (timenow > timestamp + game.updateFrequency) {
       game.update();
+
+      console.log(game.lineBuffers);
+
       game.draw();
 
       timestamp = $.now();

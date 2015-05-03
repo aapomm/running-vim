@@ -14,7 +14,7 @@ header {
 
   background-color: white;
 
-  width: 600px;
+  width: 604px;
 
   margin: 0 330px;
   padding-top: 100px;
@@ -39,6 +39,11 @@ header {
   width: 100%;
 
   border: 1px solid black;
+}
+.letter {
+  display: inline-block;
+
+  height: 29px;
 }
 .letter.active {
   background-color: gray;

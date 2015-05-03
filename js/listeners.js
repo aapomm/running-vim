@@ -1,4 +1,8 @@
 $(function(){
+
+  //
+  // Utility Functions
+  //
   var _findSiblingIndex = function($el){
     var siblings = $el.closest('div').find('.letter');
 
@@ -15,8 +19,13 @@ $(function(){
   };
 
 
+
+
+
+  //
+  // Listeners
+  //
   $('body').keydown(function(e){
-    console.log(e);
     var $active = $('.letter.active');
 
     // L button
@@ -35,7 +44,7 @@ $(function(){
     }
     // K button
     // Up
-    else if (e.which == 75) {
+    else if (e.which == 75){
       var $prevLine = $active.parents('div:first').prev(),
           activeIndex = _findSiblingIndex($active);
 
@@ -47,7 +56,7 @@ $(function(){
     }
     // J button
     // Down
-    else if (e.which == 74) {
+    else if (e.which == 74){
       var $nextLine = $active.parents('div:first').next(':not(.cmd-line)'),
           activeIndex = _findSiblingIndex($active);
 
@@ -56,6 +65,18 @@ $(function(){
 
         _switchActive($newActive);
       }
+    }
+    // W button
+    // Next Word
+    else if (e.which == 87){
+    }
+    // E button
+    // End of Next Word
+    else if (e.which == 69){
+    }
+    // B button
+    // Previous Start of Word
+    else if (e.which== 66){
     }
   });
 });

@@ -30,15 +30,30 @@ $(function(){
   //
   // Line 3
   //
-  for(var i=0; i < 18; i++){
+  for(var i=0; i < 11; i++){
     $('.line3').append("<span class='letter'>&nbsp;</span>");
   }
-  $('.line3').append("<span class='letter active'>s</span>");
-  $('.line3').append("<span class='letter'>t</span>");
+  $('.line3').append("<span class='letter'>;</span>");
   $('.line3').append("<span class='letter'>a</span>");
   $('.line3').append("<span class='letter'>r</span>");
   $('.line3').append("<span class='letter'>t</span>");
-  for(var i=0; i < 17; i++){
+
+  $('.line3').append("<span class='letter'>&nbsp;</span>");
+  $('.line3').append("<span class='letter'>&nbsp;</span>");
+  $('.line3').append("<span class='letter'>&nbsp;</span>");
+
+  $('.line3').append("<span class='letter active'>s</span>");
+  $('.line3').append("<span class='letter'>!</span>");
+  $('.line3').append("<span class='letter'>;</span>");
+  $('.line3').append("<span class='letter'>.</span>");
+  $('.line3').append("<span class='letter'>3</span>");
+
+  $('.line3').append("<span class='letter'>&nbsp;</span>");
+
+  $('.line3').append("<span class='letter'>r</span>");
+  $('.line3').append("<span class='letter'>a</span>");
+  $('.line3').append("<span class='letter'>;</span>");
+  for(var i=0; i < 13; i++){
     $('.line3').append("<span class='letter'>&nbsp;</span>");
   }
 

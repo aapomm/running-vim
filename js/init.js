@@ -13,9 +13,9 @@ $(function(){
   $('.line1').append("<span class='letter'>a</span>");
   $('.line1').append("<span class='letter'>p</span>");
   $('.line1').append("<span class='letter'>p</span>");
-  $('.line1').append("<span class='letter'>l</span>");
-  $('.line1').append("<span class='letter'>e</span>");
-  $('.line1').append("<span class='letter'>s</span>");
+  $('.line1').append("<span class='letter'>;</span>");
+  $('.line1').append("<span class='letter'>.</span>");
+  $('.line1').append("<span class='letter'>!</span>");
   for(var i=0; i < 10; i++){
     $('.line1').append("<span class='letter'>&nbsp;</span>");
   }

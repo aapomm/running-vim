@@ -23,6 +23,17 @@ $(function(){
     $newActive.addClass('active');
   };
 
+
+  var _getSiblingBy = function($el, isForward){
+    return isForward ? $el.next() : $el.prev();
+  };
+
+
+  var _getAllSiblingsBy = function($el, isForward){
+    return isForward ? $el.nextAll() : $el.prevAll();
+  };
+
+
   // Utility function to determine the next interesting letter, depending on the
   // current letter.
   //
@@ -57,37 +68,59 @@ $(function(){
   };
 
 
-  var _endInteresting = function($active, $interesting){
-    var $nextLetter = $();
+  // Utility function for finding the last letter of the word or the next
+  // Uses the _nextInteresting function to handle behavior between alphanumeric,
+  // non-alphanumeric, and spaces.
+  //
+  // Contains complicated logic that probably needs 100 pages of documentation.
+  // <Insert Blind Faith here>
+  var _endInteresting = function($active, direction){
+    var isForward = direction == 'forward';
+    var $interesting =
+          _nextInteresting($active, _getAllSiblingsBy($active, isForward));
+    // Last letter in the line
+    var $lastLetter = _getAllSiblingsBy($active, isForward).last();
+    // Letter before the interesting letter
+    var $beforeInteresting = _getSiblingBy($interesting, !isForward);
+    // Find the next letter given the interesting letter
+    var $nextLetter =
+          $interesting.text().trim() ?
+            $interesting :
+              _getAllSiblingsBy($interesting, isForward).
+                filter(_containsLetter).
+                first();
 
-    // If there is nothing insteresting
-    if ($interesting.length == 0) return $active.nextAll().last();
+    // If there is no interesting letter found
+    // Just return the last letter of the line
+    // (occurs if word/blank is at the end of line)
+    if ($interesting.length == 0) return $lastLetter;
 
-    // If the interesting letter is a non-space
-    if ($interesting.text().trim()){
-      $nextLetter = $interesting;
+    // If the active letter is not directly before interesting
+    //    and the active letter is a non space
+    // Then the end letter is the letter directly before interesting
+    // (occurs if cursor is in middle of word)
+    if (!$active.is($beforeInteresting) && $active.text().trim()){
+      return $beforeInteresting;
     }
-    // If the interesting letter is a space
-    else {
-      var $beforeInteresting = $interesting.prev();
 
-      if ($active.is($beforeInteresting)){
-        $nextLetter = $interesting.nextAll().filter(_containsLetter).first();
+    // Else if the next letter is not found
+    // Then return the last letter of the line
+    // (occurs when cursor is at end of word which has blank to the end of line)
+    if ($nextLetter.length == 0) return $lastLetter;
 
-        if ($nextLetter.length == 0) return $active.nextAll().last();
-      }
-      else return $beforeInteresting;
-    }
-
-    // Next interesting for the next word
+    // Get next interesting for the next word
     var $nextInteresting =
-      _nextInteresting($nextLetter, $nextLetter.nextAll());
+      _nextInteresting($nextLetter, _getAllSiblingsBy($nextLetter, isForward));
 
+    // If no interesting letter found for the next word
+    // Then just return the last letter of the line
+    // (occurs when the next word is at end of line)
     if ($nextInteresting.length == 0 && $nextLetter.text().trim()){
-      return $nextLetter.nextAll().last();
+      return $lastLetter;
     }
-      // _switchActive($active, $nextInteresting.prev());
-    else return $nextInteresting.prev();
+    // If an interesting letter is found for the next word
+    // Then return the letter before that interesting letter
+    else return _getSiblingBy($nextInteresting, !isForward);
   };
 
 
@@ -156,7 +189,15 @@ $(function(){
       // Get the next interesting letter
       var $interesting = _nextInteresting($active, $active.nextAll());
 
-      if ($interesting.length == 0) return;
+      // If no interesting found (word/space at end of line)
+      if ($interesting.length == 0){
+        // Switch active if space
+        if (!$active.text().trim()){
+          _switchActive($active, _getAllSiblingsBy($active, 'forward').last());
+        }
+
+        return;
+      }
 
       var $nextLetter =
             // If the next interesting letter is a non space
@@ -167,18 +208,23 @@ $(function(){
               // non-space after $interesting
               $interesting.nextAll('.letter').filter(_containsLetter).first();
 
-      _switchActive($active, $nextLetter);
+      // If the nextLetter does not exist (space at end of line),
+      // Then the next $active should be the last character
+      // Else nextLetter is the next $active
+      if ($nextLetter.length == 0){
+        _switchActive($active, _getAllSiblingsBy($active, 'forward').last());
+      }
+      else _switchActive($active, $nextLetter);
     }
     // E button
     // End of Next Word
     else if (e.which == 69){
-      var $interesting = _nextInteresting($active, $active.nextAll());
-
-      _switchActive($active, _endInteresting($active, $interesting));
+      _switchActive($active, _endInteresting($active, 'forward'));
     }
     // B button
     // Previous Start of Word
     else if (e.which== 66){
+      _switchActive($active, _endInteresting($active, 'backward'));
     }
   });
 });

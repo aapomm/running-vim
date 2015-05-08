@@ -43,10 +43,10 @@ $(function(){
   $('.line3').append("<span class='letter'>&nbsp;</span>");
 
   $('.line3').append("<span class='letter active'>s</span>");
-  $('.line3').append("<span class='letter'>!</span>");
-  $('.line3').append("<span class='letter'>;</span>");
   $('.line3').append("<span class='letter'>.</span>");
-  $('.line3').append("<span class='letter'>3</span>");
+  $('.line3').append("<span class='letter'>!</span>");
+  $('.line3').append("<span class='letter'>%</span>");
+  $('.line3').append("<span class='letter'>t</span>");
 
   $('.line3').append("<span class='letter'>&nbsp;</span>");
 

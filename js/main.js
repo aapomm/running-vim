@@ -33,5 +33,5 @@ $(function(){
 
   // Game loop
   // Updates every 0.01 of a second
-  var gameInterval = setInterval(_run, 10);
+  // var gameInterval = setInterval(_run, 10);
 });

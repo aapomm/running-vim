@@ -24,34 +24,71 @@ $(function(){
   };
 
   // Utility function to determine the next interesting letter, depending on the
-  // current active letter.
+  // current letter.
   //
-  //  If $active is a space
+  //  If $current is a space
   //  Then the next interesting letter is a non-space
   //
-  //  If $active is an alphanumeric
+  //  If $current is an alphanumeric
   //  Then the next interesting letter is a non-alphanumeric letter
   //
-  //  If $active is non-alphanumeric
-  //  Then the next interesting letter is an alphanumeric letter
-  var _nextInteresting = function($active){
-    var allNext = $active.nextAll();
-
-    for(var i=0; i < allNext.length; i++){
-      if (!$active.text().trim()){
-        if (allNext.eq(i).text().trim()) return allNext.eq(i);
+  //  If $current is non-alphanumeric
+  //  Then the next interesting letter is an alphanumeric letter or a space
+  //
+  //  Returns an empty object if no interesting letter is found. Usually occurs
+  //  when at the end of line.
+  var _nextInteresting = function($current, collection){
+    for(var i=0; i < collection.length; i++){
+      if (!$current.text().trim()){
+        if (collection.eq(i).text().trim()) return collection.eq(i);
       }
-      else if (alphaRegex.test($active.text())){
-        if (!alphaRegex.test(allNext.eq(i).text())) return allNext.eq(i);
+      else if (alphaRegex.test($current.text())){
+        if (!alphaRegex.test(collection.eq(i).text())) return collection.eq(i);
       }
-      else if(!alphaRegex.test($active.text())){
-        if (alphaRegex.test(allNext.eq(i).text())) return allNext.eq(i);
+      else if(!alphaRegex.test($current.text())){
+        if (alphaRegex.test(collection.eq(i).text()) || !collection.eq(i).text().trim()){
+          return collection.eq(i);
+        }
       }
-      else{
-        console.log('Error: Weird Letter Encountered');
-      }
+      else console.log('Error: Weird Letter Encountered');
     }
-  }
+
+    return $();
+  };
+
+
+  var _endInteresting = function($active, $interesting){
+    var $nextLetter = $();
+
+    // If there is nothing insteresting
+    if ($interesting.length == 0) return $active.nextAll().last();
+
+    // If the interesting letter is a non-space
+    if ($interesting.text().trim()){
+      $nextLetter = $interesting;
+    }
+    // If the interesting letter is a space
+    else {
+      var $beforeInteresting = $interesting.prev();
+
+      if ($active.is($beforeInteresting)){
+        $nextLetter = $interesting.nextAll().filter(_containsLetter).first();
+
+        if ($nextLetter.length == 0) return $active.nextAll().last();
+      }
+      else return $beforeInteresting;
+    }
+
+    // Next interesting for the next word
+    var $nextInteresting =
+      _nextInteresting($nextLetter, $nextLetter.nextAll());
+
+    if ($nextInteresting.length == 0 && $nextLetter.text().trim()){
+      return $nextLetter.nextAll().last();
+    }
+      // _switchActive($active, $nextInteresting.prev());
+    else return $nextInteresting.prev();
+  };
 
 
 
@@ -117,13 +154,15 @@ $(function(){
     // Next Word
     else if (e.which == 87){
       // Get the next interesting letter
-      var $interesting = _nextInteresting($active);
+      var $interesting = _nextInteresting($active, $active.nextAll());
+
+      if ($interesting.length == 0) return;
 
       var $nextLetter =
             // If the next interesting letter is a non space
             $interesting.text().trim() ?
               // Then the $nextLetter is $interesting
-              $nextLetter = $interesting :
+              $interesting :
               // Else the $nextLetter is the first encountered
               // non-space after $interesting
               $interesting.nextAll('.letter').filter(_containsLetter).first();
@@ -133,6 +172,9 @@ $(function(){
     // E button
     // End of Next Word
     else if (e.which == 69){
+      var $interesting = _nextInteresting($active, $active.nextAll());
+
+      _switchActive($active, _endInteresting($active, $interesting));
     }
     // B button
     // Previous Start of Word

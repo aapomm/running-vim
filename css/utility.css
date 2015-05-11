@@ -1,0 +1,21 @@
+.util-lines {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+}
+.stat-line,
+.cmd-line {
+  height: 30px;
+
+  border: 1px solid black;
+}
+.stat-line {
+  background-color: gray;
+}
+.points {
+  float: right;
+}
+.score:after {
+  content: ',';
+}

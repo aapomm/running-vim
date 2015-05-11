@@ -31,15 +31,6 @@ header {
 
   text-align: right;
 }
-.cmd-line {
-  position: absolute;
-  bottom: 0;
-
-  height: 30px;
-  width: 100%;
-
-  border: 1px solid black;
-}
 .letter {
   display: inline-block;
 

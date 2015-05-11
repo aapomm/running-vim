@@ -1,0 +1,14 @@
+.letter {
+  display: inline-block;
+
+  height: 29px;
+}
+.letter.active {
+  background-color: gray;
+}
+.letter.danger {
+  background-color: red;
+}
+.letter:first-child {
+  border-left: 1px solid red;
+}

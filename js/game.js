@@ -37,12 +37,11 @@ Game.prototype.update = function(){
     var lineBuffer = this.lineBuffers[i],
         randWordIndex = Math.floor(Math.random() * 4);
 
-    // Check if line buffer is empty
-    if (!lineBuffer){
-      // 10% chance
-      var leaveBlank = Math.floor(Math.random() * 10) < 9;
-      if (leaveBlank) continue;
+    // 10% chance
+    var printLine = Math.floor(Math.random() * 10) == 1;
 
+    // Check if line buffer is empty
+    if (!lineBuffer && printLine){
       this.lineBuffers[i] = this.WORDS[randWordIndex];
     }
   }
@@ -59,17 +58,22 @@ Game.prototype.draw = function(){
 
   for(var i=0; i < this.LINE_NUM; i++) {
     var lineBuffer = this.lineBuffers[i],
-        nextLetter = lineBuffer ? lineBuffer[0] : "&nbsp;";
+        nextLetter = lineBuffer ? lineBuffer[0] : "&nbsp;",
+        cssClass = 'letter';
 
-    this.$lines[i].append("<span class='letter'>" + nextLetter + "</span>");
+    // 10% chance
+    if (Math.floor(Math.random() * 10) == 1) cssClass += ' danger';
+
+    this.$lines[i].
+      append("<span class='" + cssClass + "'>" + nextLetter + "</span>");
 
     // Remove the inserted letter from the buffer
     this.lineBuffers[i] = this.lineBuffers[i].substring(1);
   }
 
-  // Update Score
+  // Show Score
   $('.score').html(this.score);
 
-  // Update level if changed
+  // Show level if changed
   if (parseInt($('.level').html()) < this.level) $('.level').html(this.level);
 }

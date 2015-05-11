@@ -20,25 +20,10 @@ header {
   padding-top: 100px;
   padding-bottom: 130px;
 }
-.line1,
-.line2,
-.line3,
-.line4,
-.line5 {
+.main-line {
   height: 27px;
 
   border: 1px solid black;
 
   text-align: right;
-}
-.letter {
-  display: inline-block;
-
-  height: 29px;
-}
-.letter.active {
-  background-color: gray;
-}
-.letter:first-child {
-  border-left: 1px solid red;
 }

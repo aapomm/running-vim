@@ -9,6 +9,9 @@
 .letter.danger {
   background-color: red;
 }
+.letter.active.danger {
+  background-color: #800000;
+}
 .letter:first-child {
   border-left: 1px solid red;
 }

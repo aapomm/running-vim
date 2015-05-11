@@ -23,6 +23,7 @@ function Game($lines){
   this.level = 1;
 }
 
+
 Game.prototype._limitLineLength = function(){
   for(var i=0; i < this.LINE_NUM; i++) {
     var line = this.$lines[i]
@@ -31,6 +32,16 @@ Game.prototype._limitLineLength = function(){
     }
   }
 }
+
+
+Game.prototype.checkGameOver = function(){
+  if (($('.active').length == 0) ||
+      ($('.active.danger').length == 1)){
+
+    return true;
+  }
+}
+
 
 Game.prototype.update = function(){
   for(var i=0; i < this.LINE_NUM; i++){
@@ -52,6 +63,7 @@ Game.prototype.update = function(){
     this.prevScore = this.score;
   }
 }
+
 
 Game.prototype.draw = function(){
   this._limitLineLength();

@@ -13,11 +13,35 @@ $(function(){
 
   var timestamp = $.now();
 
+  var gameInterval = false;
 
 
+
+
+
+  var _showGameOver = function(){
+    $('.main-line').fadeOut('slow', function(){
+      $('.main-line').html('').css({'text-align':'center'});
+      $('.line2').html('GAME OVER');
+      $('.line3').html(game.score);
+      $('.line5').html(':replay?');
+      $('.main-line').fadeIn('slow');
+    });
+  }
 
 
   var _run = function(){
+    // Check for game over
+    if (game.checkGameOver()){
+      // Remove controls
+      $('body').unbind('keydown');
+
+      clearInterval(gameInterval);
+      gameInterval = false;
+
+      _showGameOver();
+    }
+
     var timenow = $.now();
     if (timenow > timestamp + game.updateFrequency) {
       game.update();
@@ -33,5 +57,5 @@ $(function(){
 
   // Game loop
   // Updates every 0.01 of a second
-  // var gameInterval = setInterval(_run, 10);
+  gameInterval = setInterval(_run, 10);
 });

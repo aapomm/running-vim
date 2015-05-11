@@ -142,7 +142,10 @@ $(function(){
   // Listeners
   //
 
-  $('body').keydown(function(e){
+  Game.prototype.controls = function(e){
+    // No overlap with command field
+    if ($('.cmd-field').is(':focus')) return;
+
     var $active = $('.letter.active');
 
     // L button
@@ -226,5 +229,5 @@ $(function(){
     else if (e.which== 66){
       _switchActive($active, _endInteresting($active, 'backward'));
     }
-  });
+  };
 });

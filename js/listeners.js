@@ -230,4 +230,6 @@ $(function(){
       _switchActive($active, _endInteresting($active, 'backward'));
     }
   };
+
+  $('body').keydown(Game.prototype.controls);
 });

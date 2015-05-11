@@ -15,9 +15,11 @@ $(function(){
     // Enter key
     else if (e.keyCode == 13){
       var command = $(this).val();
-      if (command == ':start' || command == ':replay'){
-        $('body').keydown(Game.prototype.controls);
+      if (command == ':start' || command == ':s'){
         main.start();
+
+        $('body').unbind('keydown');
+        $('body').on('keydown', Game.prototype.controls);
       }
       else if (command == ':pause'){
         main.stop();

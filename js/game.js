@@ -9,18 +9,20 @@ function Game($lines){
     "asdf"
   ];
 
-  // In milliseconds
-  this.updateFrequency = 200;
-
   this.$lines = $lines;
-
-  // Instantiate line buffers
   this.lineBuffers = []
-  for(var i=0; i < this.LINE_NUM; i++) this.lineBuffers[i] = "";
 
-  this.score = 0;
-  this.prevScore = 0;
-  this.level = 1;
+  this.initialize = function(){
+    // In milliseconds
+    this.updateFrequency = 200;
+
+    // Instantiate line buffers
+    for(var i=0; i < this.LINE_NUM; i++) this.lineBuffers[i] = "";
+
+    this.score = 0;
+    this.prevScore = 0;
+    this.level = 1;
+  }
 }
 
 
@@ -34,12 +36,11 @@ Game.prototype._limitLineLength = function(){
 }
 
 
-Game.prototype.checkGameOver = function(){
-  if (($('.active').length == 0) ||
-      ($('.active.danger').length == 1)){
 
-    return true;
-  }
+
+
+Game.prototype.checkGameOver = function(){
+  return (($('.active').length == 0) || ($('.active.danger').length == 1));
 }
 
 
@@ -87,5 +88,5 @@ Game.prototype.draw = function(){
   $('.score').html(this.score);
 
   // Show level if changed
-  if (parseInt($('.level').html()) < this.level) $('.level').html(this.level);
+  if (parseInt($('.level').html()) != this.level) $('.level').html(this.level);
 }

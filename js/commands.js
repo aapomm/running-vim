@@ -1,6 +1,34 @@
 $(function(){
-  var main = new Main();
+  var main = new Main(),
+      initializer = new Initializer();
 
+
+
+
+  var _setupHelp = function(){
+    // text:
+    //
+    // Controls: h, j, k, l, w, e, b
+    // Commands:
+    // :s - start the game
+    // :? - help
+    $('.main-line').html('').fadeOut('slow', function(){
+      $('.main-line').html('');
+      initializer.initLine($('.line1'), 'Controls: h, j, k, l, w, e, b');
+      initializer.initLine($('.line2'), '');
+      initializer.initLine($('.line3'), 'Commands:');
+      initializer.initLine($('.line4'), ':s - start the game');
+      initializer.initLine($('.line5'), ':? - help');
+      $('.main-line').fadeIn('slow');
+    });
+  }
+
+
+
+
+  //
+  // Command listeners
+  //
   $('.cmd-field').blur(function(){
     $(this).val('').prop('disabled', true);
   });
@@ -15,16 +43,14 @@ $(function(){
     // Enter key
     else if (e.keyCode == 13){
       var command = $(this).val();
-      if (command == ':start' || command == ':s'){
+      console.log(main);
+      if (command == ':s' && !main.isStarted){
         main.start();
 
-        $('body').unbind('keydown');
         $('body').on('keydown', Game.prototype.controls);
       }
-      else if (command == ':pause'){
-        main.stop();
-
-        $('body').unbind('keydown');
+      else if(command == ':?' && !main.isStarted){
+        _setupHelp();
       }
 
       $(this).val('').blur();

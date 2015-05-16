@@ -15,30 +15,30 @@ function Main(){
 
   this.gameInterval = false;
 
-  this.isStarted = true;
+  this.isStarted = false;
 }
 
 
 Main.prototype._showGameOver = function(){
-  var _this = this;
+  var _this = this,
+      initializer = new Initializer();
 
   $('.main-line').fadeOut('slow', function(){
-    $('.main-line').html('').css({'text-align':'center'});
-    $('.line2').html('GAME OVER');
-    $('.line3').html(_this.game.score);
-    $('.line5').html('type :start / :s');
+    console.log('showgameover');
+    $('.main-line').html('');
+    initializer.initLine($('.line1'), '');
+    initializer.initLine($('.line2'), 'GAME OVER');
+    initializer.initLine($('.line3'), _this.game.score.toString());
+    initializer.initLine($('.line4'), '');
+    initializer.initLine($('.line5'), 'type :s to replay');
     $('.main-line').fadeIn('slow');
   });
 }
 
 Main.prototype._initialize = function(){
-  $('.main-line').each(function(){
-    $(this).html('');
-    for (var i=0; i < 40; i++){
-      $(this).append("<span class='letter'>&nbsp;</span>");
-    }
-  });
-  $('.line3').find('span').eq(20).addClass('active');
+  if ($('.active').length == 0){
+    $('.line3').find('span').eq(20).addClass('active');
+  }
 }
 
 
@@ -54,8 +54,6 @@ Main.prototype.run = function(){
     this.stop();
 
     this._showGameOver();
-
-    this.isStarted = false;
   }
 
   var timenow = $.now();
@@ -75,6 +73,8 @@ Main.prototype.start = function(){
 
   _this.isStarted = true;
 
+  this.game.initialize();
+
   // Game loop
   // Runs every 0.01 of a second
   this.gameInterval = setInterval(function(){ _this.run(); }, 10);
@@ -84,4 +84,6 @@ Main.prototype.start = function(){
 Main.prototype.stop = function(){
   clearInterval(this.gameInterval);
   this.gameInterval = false;
+
+  this.isStarted = false;
 }

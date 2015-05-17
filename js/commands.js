@@ -12,14 +12,14 @@ $(function(){
     // Commands:
     // :s - start the game
     // :? - help
-    $('.main-line').html('').fadeOut('slow', function(){
+    $('.main-container').fadeOut('slow', function(){
       $('.main-line').html('');
       initializer.initLine($('.line1'), 'Controls: h, j, k, l, w, e, b');
       initializer.initLine($('.line2'), '');
       initializer.initLine($('.line3'), 'Commands:');
       initializer.initLine($('.line4'), ':s - start the game');
       initializer.initLine($('.line5'), ':? - help');
-      $('.main-line').fadeIn('slow');
+      $('.main-container').fadeIn('slow');
     });
   }
 
@@ -36,14 +36,14 @@ $(function(){
 
   $('.cmd-field').keydown(function(e){
     // Esc key
-    if (e.keyCode == 27){
+    if (e.which == 27){
       $(this).val('').blur();
       $('body').focus();
     }
     // Enter key
-    else if (e.keyCode == 13){
+    else if (e.which == 13){
       var command = $(this).val();
-      console.log(main);
+
       if (command == ':s' && !main.isStarted){
         main.start();
 
@@ -59,9 +59,15 @@ $(function(){
   });
 
 
-  $('body').keypress(function(e){
-    if (e.keyCode == 58 && e.shiftKey){
+  $(window).keypress(function(e){
+    if (e.which == 58 && e.shiftKey && $('.cmd-field').prop('disabled')){
       $('.cmd-field').prop('disabled', false).focus();
+    }
+  });
+
+  $(window).keyup(function(e){
+    if (e.which == 59){
+      $('.cmd-field').val(':');
     }
   });
 });

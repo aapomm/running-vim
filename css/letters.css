@@ -13,5 +13,5 @@
   background-color: #800000;
 }
 .letter:first-child {
-  border-left: 1px solid red;
+  border-left: 3px solid red;
 }

@@ -3,6 +3,7 @@ body {
 
   font-family: monospace;
   font-size: 25px;
+  color: #39FF14;
 }
 header {
   height: 150px;
@@ -12,7 +13,9 @@ header {
   display: inline-block;
   position: relative;
 
-  background-color: white;
+  background-color: black;
+
+  border: 1px solid #39FF14;
 
   width: 604px;
 
@@ -22,8 +25,6 @@ header {
 }
 .main-line {
   height: 27px;
-
-  border: 1px solid black;
 
   text-align: right;
 }

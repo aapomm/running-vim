@@ -23,15 +23,14 @@ Main.prototype._showGameOver = function(){
   var _this = this,
       initializer = new Initializer();
 
-  $('.main-line').fadeOut('slow', function(){
-    console.log('showgameover');
+  $('.main-container').fadeOut('slow', function(){
     $('.main-line').html('');
     initializer.initLine($('.line1'), '');
     initializer.initLine($('.line2'), 'GAME OVER');
     initializer.initLine($('.line3'), _this.game.score.toString());
     initializer.initLine($('.line4'), '');
     initializer.initLine($('.line5'), 'type :s to replay');
-    $('.main-line').fadeIn('slow');
+    $('.main-container').fadeIn('slow');
   });
 }
 

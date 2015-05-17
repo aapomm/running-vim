@@ -45,6 +45,4 @@ $(function(){
 
   // Line 5
   initializer.initLine($('.line5'), '');
-
-  $('body').focus();
 });

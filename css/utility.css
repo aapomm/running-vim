@@ -4,23 +4,24 @@
 
   width: 100%;
 }
-.stat-line,
-.cmd-line {
-  height: 30px;
-
-  border: 1px solid black;
-}
 .cmd-field{
-  height: 30px;
+  height: 35px;
   width: 99%;
 
   font-family: monospace;
   font-size: 25px;
 
-  /* border: none; */
+  background-color: black;
+  color: #39FF14;
+
+  border: none;
 }
 .stat-line {
+  height: 32px;
+
   background-color: gray;
+
+  color: black;
 }
 .points {
   float: right;

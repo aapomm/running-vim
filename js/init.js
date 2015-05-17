@@ -10,6 +10,9 @@ function Initializer(){
     }
     var spaceLength = (this.MAX_CHARACTERS - str.length)/2;
 
+    // Clean line
+    $line.html('');
+
     for(var i=0; i < Math.floor(spaceLength); i++){
       $line.append("<span class='letter'>&nbsp;</span>");
     }
@@ -30,19 +33,16 @@ $(function(){
   //
   // Initialize Screen State
   //
-
-  // Line 1
-  initializer.initLine($('.line1'), 'running-vim');
-
-  // Line 2
-  initializer.initLine($('.line2'), 'movement: h,j,k,l,w,e,b');
+  $('.main-line').each(function(){
+    initializer.initLine($(this), '');
+  });
 
   // Line 3
-  initializer.initLine($('.line3'), '');
+  initializer.initLine($('.line3'), 'running-vim');
 
   // Line 4
-  initializer.initLine($('.line4'), 'type :s to begin');
+  initializer.initLine($('.line4'), 'movement: h,j,k,l,w,e,b');
 
-  // Line 5
-  initializer.initLine($('.line5'), '');
+  // Line 6
+  initializer.initLine($('.line6'), 'type :s to begin');
 });

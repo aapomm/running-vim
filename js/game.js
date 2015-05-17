@@ -1,5 +1,5 @@
 function Game($lines){
-  this.LINE_NUM = 5;
+  this.LINE_NUM = 8;
   this.MAX_CHARACTERS = 40;
 
   this.WORDS = [

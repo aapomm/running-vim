@@ -6,19 +6,20 @@ $(function(){
 
 
   var _setupHelp = function(){
-    // text:
     //
     // Controls: h, j, k, l, w, e, b
     // Commands:
     // :s - start the game
     // :? - help
+    //
     $('.main-container').fadeOut('slow', function(){
-      $('.main-line').html('');
-      initializer.initLine($('.line1'), 'Controls: h, j, k, l, w, e, b');
-      initializer.initLine($('.line2'), '');
-      initializer.initLine($('.line3'), 'Commands:');
-      initializer.initLine($('.line4'), ':s - start the game');
-      initializer.initLine($('.line5'), ':? - help');
+      $('.main-line').each(function(){
+        initializer.initLine($(this), '');
+      });
+      initializer.initLine($('.line3'), 'Controls: h, j, k, l, w, e, b');
+      initializer.initLine($('.line5'), 'Commands:');
+      initializer.initLine($('.line6'), ':s - start the game');
+      initializer.initLine($('.line7'), ':? - help');
       $('.main-container').fadeIn('slow');
     });
   }

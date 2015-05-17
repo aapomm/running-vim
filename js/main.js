@@ -5,7 +5,10 @@ function Main(){
     $('.line2'),
     $('.line3'),
     $('.line4'),
-    $('.line5')
+    $('.line5'),
+    $('.line6'),
+    $('.line7'),
+    $('.line8')
   ]
 
   // Instantiate Game class
@@ -24,12 +27,12 @@ Main.prototype._showGameOver = function(){
       initializer = new Initializer();
 
   $('.main-container').fadeOut('slow', function(){
-    $('.main-line').html('');
-    initializer.initLine($('.line1'), '');
-    initializer.initLine($('.line2'), 'GAME OVER');
-    initializer.initLine($('.line3'), _this.game.score.toString());
-    initializer.initLine($('.line4'), '');
-    initializer.initLine($('.line5'), 'type :s to replay');
+    $('.main-line').each(function(){
+      initializer.initLine($(this), '');
+    });
+    initializer.initLine($('.line3'), 'GAME OVER');
+    initializer.initLine($('.line4'), _this.game.score.toString());
+    initializer.initLine($('.line6'), 'type :s to replay');
     $('.main-container').fadeIn('slow');
   });
 }

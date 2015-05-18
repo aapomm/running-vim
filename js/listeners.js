@@ -1,6 +1,6 @@
 $(function(){
 
-  var alphaRegex = new RegExp('^[a-z0-9]+$');
+  var alphaRegex = new RegExp('^[a-zA-Z0-9]+$');
 
   //
   // Utility Functions

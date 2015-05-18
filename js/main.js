@@ -30,9 +30,9 @@ Main.prototype._showGameOver = function(){
     $('.main-line').each(function(){
       initializer.initLine($(this), '');
     });
-    initializer.initLine($('.line3'), 'GAME OVER');
-    initializer.initLine($('.line4'), _this.game.score.toString());
-    initializer.initLine($('.line6'), 'type :s to replay');
+    initializer.initLine($('.line3'), 'game over');
+    initializer.initLine($('.line5'), _this.game.score.toString());
+    initializer.initLine($('.line7'), 'type :s to replay');
     $('.main-container').fadeIn('slow');
   });
 }

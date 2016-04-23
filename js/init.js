@@ -45,4 +45,7 @@ $(function(){
 
   // Line 6
   initializer.initLine($('.line6'), 'type :s to begin');
+
+  // Line 7
+  initializer.initLine($('.line7'), 'type :? for help');
 });

@@ -1,13 +1,15 @@
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 600px;
+
   background-color: black;
 
   font-family: monospace;
   font-size: 25px;
   color: #39FF14;
-}
-header {
-  height: 150px;
-  width: 1250px;
 }
 .console {
   display: inline-block;
@@ -18,8 +20,6 @@ header {
   border: 1px solid #39FF14;
 
   width: 604px;
-
-  margin: 0 330px;
   padding-top: 40px;
   padding-bottom: 130px;
 }

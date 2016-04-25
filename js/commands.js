@@ -61,19 +61,6 @@ $(function(){
     }
   });
 
-  // Need to use keyup to correctly capture length of .cmd-field
-  $('.cmd-field').keyup(function(e){
-    // Backspace key and Delete key
-    if (e.which == 8 || e.which == 46){
-      var command = $(this).val();
-
-      if (command.length == 0){
-        e.preventDefault(); // prevent backspace from going to previous page
-        $(this).val('').blur();
-        $('body').focus();
-      }
-    }
-  });
 
   // Detect entry to command mode
   $(window).keypress(function(e){

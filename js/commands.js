@@ -30,6 +30,8 @@ $(function(){
   //
   // Command listeners
   //
+
+  // Helper function to remove focus from .cmd-field
   $('.cmd-field').blur(function(){
     $(this).val('').prop('disabled', true);
   });
@@ -60,8 +62,12 @@ $(function(){
   });
 
 
+  // Detect entry to command mode
   $(window).keypress(function(e){
-    if (e.which == 58 && e.shiftKey && $('.cmd-field').prop('disabled')){
+    // If semicolon button is pressed along with shift key and not currently in
+    // command mode and not in-game
+    if (e.which == 58 && e.shiftKey && $('.cmd-field').prop('disabled') &&
+        !main.isStarted){
       $('.cmd-field').prop('disabled', false).focus();
     }
   });

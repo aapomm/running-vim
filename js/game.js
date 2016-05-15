@@ -105,12 +105,15 @@ Game.prototype.update = function(){
     }
   }
 
+  // Update the score and check if we have reached the next level
   if (this.score++ == this.prevScore + (this.level)*50 ){
-    if (this.updateFrequency > 103){
-      this.updateFrequency *= 0.80;
-    }
     this.level++;
     this.prevScore = this.score;
+  }
+
+  // Increase the speed of the game
+  if (this.updateFrequency > 103){
+    this.updateFrequency *= 0.9985
   }
 }
 

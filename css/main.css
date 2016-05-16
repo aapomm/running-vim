@@ -27,14 +27,3 @@ body {
   height: 27px;
 
   text-align: right;
-}
-#mute{
-  margin-top:337px;
-  width:50px;
-  height:50px;
-
-  background-image: url(../images/mutedButton.png);
-}
-#mute:hover{
-  background-image: url(../images/muteButton.png);
-}

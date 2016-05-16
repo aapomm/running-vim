@@ -1,8 +1,3 @@
-// Start Music
-var audio = document.getElementById('sound');
-var sw = true;
-audio.play();
-
 function Main(){
   // DOM objects
   this.$lines = [
@@ -25,21 +20,6 @@ function Main(){
 
   this.isStarted = false;
 }
-
-//Function for stopping and starting audio playback -Z
-function MusicSwitch(){
-if(sw){
-  audio.pause()
-  sw = false;
-}
-else if(sw === false){
-  audio.play();
-  sw = true;
-}
-}
-document.getElementById('mute').addEventListener('click', MusicSwitch);
-//restarts music once track has ended
-document.getElementById('sound').addEventListener('onended', audio.play());
 
 Main.prototype._showGameOver = function(){
   var _this = this,

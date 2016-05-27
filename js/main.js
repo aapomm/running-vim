@@ -21,7 +21,6 @@ function Main(){
   this.isStarted = false;
 }
 
-
 Main.prototype._showGameOver = function(){
   var _this = this,
       initializer = new Initializer();
